@@ -6,6 +6,7 @@
 #include <deque>
 #include "AllpassFilter.h"
 #include "FIRFilter.h"
+#inlcude "IIRFilter.h"
 
 using std::size_t;
 using std::uint8_t;
@@ -32,6 +33,7 @@ private:
   AllpassFilter allpass2;
   AllpassFilter allpass3;
   AllpassFilter allpass4;
+  IIRFilter iirFilter;
   FIRFilter firFilter;
   buffPtr delay;
   outType do_filtering(outType new_x);
