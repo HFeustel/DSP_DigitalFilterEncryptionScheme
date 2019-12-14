@@ -39,7 +39,7 @@ Decoded samples are always in the same format:
 * sample rate is 44100 Hz.
 
 Note that the raspberry pi works much better if the GUI has been turned off (just google it).
-# Compiling the code 
+# Compiling the code (IF USING ENCRYPTOR SKIP TO BOTTOM AT STEP 5)
 
 A note on format any font that looks
 ```
@@ -245,3 +245,15 @@ FIRFilter::FIRFilter(std::vector<float> taps_) :
   input_samples = std::make_unique<deque>(delay, 0.0);
 }
 ```
+#ADDITIONS FOR ENCRYPTION SCHEME
+ Follow the steps listed above until step 5 if you want to use the encryption scheme
+ Step 5. Compile all files separately using code below for each program
+ ```
+ g++ -c FIRFilter.cpp -o FIRFilter.o
+ ```
+Link Encryptor and Decryptor to executable
+ ```
+ g++ Encryptor.o FIRFilter.o IIRFilter.o AllpassFilter.o -o ffmpeg_encrypt
+ g++ Decryptor.o FIRFilter.o IIRFilter.o AllpassFilter.o -o ffmpeg_decrypt
+ ```
+ Do Step 6 and Step 7 as instructed above, but use ffmpeg_encrypt inplace of ffmpeg_filter and output to a file of your choice. Then run the same command only use the encrypted file as the input, and ffmpeg_decrypt in place of ffmpeg_encrypt. You can output this to a file or play it in your ears. 
